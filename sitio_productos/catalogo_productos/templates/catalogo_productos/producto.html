@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ producto.nombre_producto }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f9f9f9;
+        }
+        header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+        header a {
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #444;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            background: #0077cc;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #005fa3;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #0077cc;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{% url 'admin:index' %}">Ingresar al Admin</a>
+    </header>
+
+    <div class="card">
+        <h1>{{ producto.nombre_producto }}</h1>
+        <p class="price">Precio: ${{ producto.precio_producto_mxn }}</p>
+        <p>Marca: {{ producto.marca }}</p>
+
+        <a href="{% url 'producto_dummy_buy' producto.pk %}" class="btn">🛒 Comprar (dummy)</a>
+        <br>
+        <a href="{% url 'lista_productos' %}" class="back-link">Volver al catálogo</a>
+    </div>
+</body>
+</html>

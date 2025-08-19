@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f9f9f9;
+        }
+        header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+        header a {
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        a {
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .price {
+            color: #444;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{% url 'admin:index' %}">Log in Admin</a>
+    </header>
+
+    <form method="get" action="" style="margin-bottom: 1.5rem;">
+        <input type="text" name="q" placeholder="Buscar por nombre o SKU..." required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if mensaje %}
+      <p style="color: red;">{{ mensaje }}</p>
+    {% endif %}
+
+    <h1>Catálogo</h1>
+
+    <ul>
+        {% for producto in productos %}
+        <li>
+            <a href="{% url 'ver_producto' producto.pk %}">
+                {{ producto.nombre_producto }}
+            </a>
+            <span class="price">- ${{ producto.precio_producto_mxn }}</span>
+        </li>
+        {% empty %}
+        <li>No hay productos disponibles.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
